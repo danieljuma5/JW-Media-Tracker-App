@@ -38,7 +38,7 @@ function LoginForm() {
 
         <p className="mt-10 text-center text-sm text-gray-500">
           Not a member?
-          <a href="" onClick={handleClick} className="font-semibold pl-2 leading-6 text-indigo-600 hover:text-indigo-500">SignUp</a>
+          <button onClick={handleClick} className="font-semibold pl-2 leading-6 text-indigo-600 hover:text-indigo-500 focus:outline-none">SignUp</button>
         </p>
       </div>
     </div>

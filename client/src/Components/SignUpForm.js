@@ -1,6 +1,11 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function SignUpForm() {
+  const navigate = useNavigate()
+  const handleClick = () => {
+    navigate('/login')
+  }
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -60,7 +65,7 @@ function SignUpForm() {
 
         <p className="mt-10 text-center text-sm text-gray-500">
           Already a member?
-          <a href="" className="font-semibold pl-2 leading-6 text-indigo-600 hover:text-indigo-500">SignIn</a>
+          <button onClick={handleClick} className="font-semibold pl-2 leading-6 text-indigo-600 hover:text-indigo-500 focus:outline-none">SignIn</button>
         </p>
       </div>
     </div>
