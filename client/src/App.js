@@ -6,21 +6,24 @@ import Home from "./Components/Home";
 import SignUpForm from "./Components/SignUpForm";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [user, setUser] = useState(null)
 
-  useEffect(() => {
-    fetch("/hello")
-      .then((r) => r.json())
-      .then((data) => setCount(data.count));
-  }, []);
+//   useEffect(() => {
+//     fetch("/me").then((r) => {
+//         if (r.ok) {
+//           r.json().then((user) => setUser(user));
+//         }
+//   });
+//  }, []);
 
+    // if (!user) return <LoginForm onLogin={setUser}/>;
   return (
     <div className="App">
-      <Navbar/>
+      <Navbar user={user} setUser={setUser} />
       <Routes>
-        <Route path="/login" element={<LoginForm/>}/>
-        <Route path="/signup" element={<SignUpForm/>}/>
-      <Route path="/" element={<Home/>}/>
+        <Route path="/login" element={<LoginForm setUser={setUser}/>}/>
+        <Route path="/signup" element={<SignUpForm setUser={setUser} />}/>
+      <Route path="/" element={<Home user={user}/>}/>
       </Routes>
     </div>
   );
