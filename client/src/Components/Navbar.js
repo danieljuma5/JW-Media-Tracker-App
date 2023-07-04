@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Navbar = () => {
+const Navbar = ({user, setUser}) => {
   return (
    
 <nav class="bg-white border-gray-200 dark:bg-gray-900">
-  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+  {!user ? <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
     <Link to="/" class="flex items-center">
         <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="Flowbite Logo" />
         <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Logo</span>
@@ -30,7 +30,8 @@ const Navbar = () => {
         </li>
       </ul>
     </div>
-  </div>
+  </div> : 
+   (<h3>Welcome {user.username}!</h3>)}
 </nav>
 
   )

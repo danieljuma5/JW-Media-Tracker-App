@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function SignUpForm() {
+function SignUpForm({setUser}) {
   const navigate = useNavigate()
   const handleClick = () => {
     navigate('/login')
@@ -26,14 +26,16 @@ function SignUpForm() {
       },
       body: JSON.stringify({
         username,
+        email,
         password,
         password_confirmation: passwordConfirmation,
         avatar_url: avatarUrl
       }),
     }).then((r) => {
+      console.log(r)
       setIsLoading(false);
       if (r.ok) {
-        r.json().then((user) => onLogin(user));
+        r.json().then((user) => setUser(user));
       } else {
         r.json().then((err) => setErrors(err.errors));
       }
@@ -80,10 +82,10 @@ function SignUpForm() {
 
           <div>
             <div className="flex items-center justify-between">
-              <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Confirm Password</label>
+              <label htmlFor="confirm-password" className="block text-sm font-medium leading-6 text-gray-900">Confirm Password</label>
             </div>
             <div className="mt-2">
-              <input id="password" name="password" type="password" autoComplete="current-password" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+              <input id="confirm-password" name="confirm-password" type="confirm-password" autoComplete="current-password" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
               value={passwordConfirmation} onChange={(e) => setPasswordConfirmation(e.target.value)}/>
             </div>
           </div>
@@ -93,7 +95,7 @@ function SignUpForm() {
               <label htmlFor="avatar-url" className="block text-sm font-medium leading-6 text-gray-900">Avatar URL</label>
             </div>
             <div className="mt-2">
-              <input id="avatar-url" name="password" type="avatar-url" autoComplete="avatar_url" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+              <input id="avatar-url" name="avatar-url" type="avatar-url" autoComplete="avatar_url" required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
               value={avatarUrl} onChange={(e) => setAvatarUrl(e.target.value)}/>
             </div>
           </div>
@@ -107,6 +109,9 @@ function SignUpForm() {
           Already a member?
           <button onClick={handleClick} className="font-semibold pl-2 leading-6 text-indigo-600 hover:text-indigo-500 focus:outline-none">SignIn</button>
         </p>
+        {errors.map((err) => (
+          <li key={err}>{err}</li>
+        ))}
       </div>
     </div>
   )

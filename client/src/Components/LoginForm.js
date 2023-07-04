@@ -19,7 +19,7 @@ function LoginForm({ setUser }) {
       body: JSON.stringify({ username, password }),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((user) => setUser(user));
+        r.json().then((user) => console.log(user));
       }
     });
   }

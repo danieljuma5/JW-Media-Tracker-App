@@ -8,15 +8,14 @@ import SignUpForm from "./Components/SignUpForm";
 function App() {
   const [user, setUser] = useState(null)
 
-//   useEffect(() => {
-//     fetch("/me").then((r) => {
-//         if (r.ok) {
-//           r.json().then((user) => setUser(user));
-//         }
-//   });
-//  }, []);
+  useEffect(() => {
+    fetch("/me").then((r) => {
+        if (r.ok) {
+          r.json().then((user) => setUser(user));
+        }
+  });
+ }, []);
 
-    // if (!user) return <LoginForm onLogin={setUser}/>;
   return (
     <div className="App">
       <Navbar user={user} setUser={setUser} />
