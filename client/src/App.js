@@ -4,6 +4,7 @@ import Navbar from "./Components/Navbar";
 import LoginForm from "./Components/LoginForm";
 import Home from "./Components/Home";
 import SignUpForm from "./Components/SignUpForm";
+import Posts from "./Components/Posts";
 
 function App() {
   const [user, setUser] = useState(null)
@@ -23,6 +24,7 @@ function App() {
         <Route path="/login" element={<LoginForm setUser={setUser}/>}/>
         <Route path="/signup" element={<SignUpForm setUser={setUser} />}/>
       <Route path="/" element={<Home user={user}/>}/>
+      <Route path="/posts" element={<Posts/>}/>
       </Routes>
     </div>
   );
