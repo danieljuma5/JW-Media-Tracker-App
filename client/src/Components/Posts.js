@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import PostCard from './PostCard'
 import axios from 'axios'
 
-function Posts() {
-  const [posts,setPosts] = useState([]);
+function Posts({posts,setPosts,onUpdatePost}) {
+  
   // making a request for posts
   const fetchPosts = () => {
     axios.get('/posts')
@@ -13,12 +13,20 @@ function Posts() {
 useEffect(() => {
   fetchPosts()
 },[])
-  console.log(posts)
+
+
+
+
+
   return (
-    <div className="flex justify-between">
-      <PostCard posts={posts}/>
-    </div>
+  <ul>
+  {posts.map((post) => (
+    <li key={post.id}>
+  <PostCard onUpdatePost={onUpdatePost} setPosts={setPosts} post={post}/>
+    </li>
+  ))
+  }
+  </ul>
   )
 }
-
 export default Posts;

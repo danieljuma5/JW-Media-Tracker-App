@@ -8,6 +8,7 @@ import Posts from "./Components/Posts";
 
 function App() {
   const [user, setUser] = useState(null)
+  const [posts,setPosts] = useState([]);
 
   useEffect(() => {
     fetch("/me").then((r) => {
@@ -17,6 +18,14 @@ function App() {
   });
  }, []);
 
+ function handleUpdatePost(updatedPost) {
+    const updatedPosts = posts.map((post) =>
+      post.id === updatedPost.id ? updatedPost : post
+    );
+    setPosts(updatedPosts);
+  }
+
+
   return (
     <div className="App">
       <Navbar user={user} setUser={setUser} />
@@ -24,7 +33,7 @@ function App() {
         <Route path="/login" element={<LoginForm setUser={setUser}/>}/>
         <Route path="/signup" element={<SignUpForm setUser={setUser} />}/>
       <Route path="/" element={<Home user={user}/>}/>
-      <Route path="/posts" element={<Posts/>}/>
+      <Route path="/posts" element={<Posts posts={posts} setPosts={setPosts} onUpdatePost={handleUpdatePost} />}/>
       </Routes>
     </div>
   );
