@@ -23,9 +23,9 @@ const CommentCard = ({ comment }) => {
             {comment.user_information.username}
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-400">
-            <span>{date}</span> {/* Render the date */}
+            <span>{date}</span>
             <span> at </span>
-            <span>{time}</span> {/* Render the time */}
+            <span>{time}</span>
           </p>
         </div>
         <div className="relative">

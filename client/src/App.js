@@ -27,7 +27,7 @@ function App() {
         <Route path="/signup" element={<SignUpForm setUser={setUser} />}/>
       <Route path="/" element={<Home user={user}/>}/>
       <Route path="/posts" element={<Posts posts={posts} setPosts={setPosts} />}/>
-      <Route path="/posts/:postId" element={<CommentPage/>}/>
+      <Route path="/posts/:postId" element={<CommentPage user={user}/>}/>
       </Routes>
     </div>
   );

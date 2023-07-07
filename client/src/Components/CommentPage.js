@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import CommentPageCard from './CommentPageCard';
 import CommentSection from './CommentSection';
 
-const CommentPage = () => {
+const CommentPage = ({user}) => {
   const [isLoading, setIsLoading] = useState(true);
   const [posts, setPosts] = useState([]);
   const { postId } = useParams();
@@ -29,7 +29,7 @@ const CommentPage = () => {
   return (
     <>
       <CommentPageCard post={posts} />
-      <CommentSection post={posts}/>
+      <CommentSection post={posts} setPost={setPosts} user={user}/>
     </>
   );
 };
