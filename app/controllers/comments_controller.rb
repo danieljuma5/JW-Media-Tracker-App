@@ -4,7 +4,15 @@ class CommentsController < ApplicationController
     comment = Comment.create!(comment_params)
     render json: comment
   end
+  def destroy
+    comment = find_by
+    comment.destroy
+    head :no_content
+  end
   private
+  def find_by
+    comment = Comment.find(params[:id])
+  end
   def comment_params
     params.permit(:body,:post_id,:user_id)
   end

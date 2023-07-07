@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
-const CommentCard = ({ comment,user }) => {
+const CommentCard = ({ comment,user,post,setPost }) => {
+
   const isCurrentUser = user && comment.user_information.id === user.id;
   
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -15,6 +17,20 @@ const CommentCard = ({ comment,user }) => {
   const createdAt = new Date(comment.created_at);
   const date = createdAt.toDateString();
   const time = createdAt.toLocaleTimeString();
+
+  function handleDelete(id) {
+    axios.delete(`/comments/${comment.id}`)
+  .then(response => {
+    console.log(`Deleted post with ID ${comment.id}`);
+    setPost(prevPost => ({
+        ...prevPost,
+        comments: prevPost.comments.filter(prevComment => prevComment.id !== comment.id)
+      }));
+  })
+  .catch(error => {
+    console.error(error);
+  });
+  }
 
   return (
     <article className="p-6 mb-6 text-base bg-white rounded-lg dark:bg-gray-900">
@@ -52,7 +68,7 @@ const CommentCard = ({ comment,user }) => {
                 <div className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</div>
               </li>
               <li>
-                <div className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</div>
+                <div onClick={handleDelete} className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</div>
               </li>
             </ul>
           </div>

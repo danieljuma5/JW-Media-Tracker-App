@@ -8,7 +8,6 @@ function CommentSection({post,setPost,user}) {
   const [comment, setComment] = useState('');
   const [showError, setShowError] = useState(false);
   const {postId} = useParams()
-  console.log(user)
 
   const handleCommentChange = (event) => {
     setComment(event.target.value);
@@ -71,7 +70,7 @@ function CommentSection({post,setPost,user}) {
             {post.comments.map((comment,index) => (
               <ul key={index}>
                 <li >
-                  <CommentCard post={post} comment={comment} user={user}/>
+                  <CommentCard post={post} setPost={setPost} comment={comment} user={user}/>
                 </li>
               </ul>
             ))}
