@@ -2,6 +2,8 @@ class User < ApplicationRecord
   has_secure_password
   has_many :posts
   has_many :replies
+  has_many :forum_replies
+  has_many :forum_posts
   validates :username, presence: true
   validates :avatar_url, presence: true, format: { with: URI::DEFAULT_PARSER.make_regexp }
   validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
