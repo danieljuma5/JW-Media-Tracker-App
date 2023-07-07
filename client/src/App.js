@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import {Routes,Route,useParams} from 'react-router-dom';
+import {Routes,Route} from 'react-router-dom';
 import Navbar from "./Components/Navbar";
 import LoginForm from "./Components/LoginForm";
 import Home from "./Components/Home";

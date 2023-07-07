@@ -1,0 +1,2 @@
+class ForumRepliesController < ApplicationController
+end

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :forum_replies
+  resources :forum_posts
   resources :users, only:[:index,:create, :update]
   resources :posts
   resources :comments, only:[:create,:update,:destroy]
