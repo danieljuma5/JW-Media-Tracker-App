@@ -1,6 +1,7 @@
 
 import axios from "axios";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 function PostCard({ post, onUpdatePost, setPosts }) {
   const [isPostLiked, setIsPostLiked] = useState(post.is_liked);
   const [upvotes, setUpvotes] = useState(post.upvotes);
@@ -65,7 +66,9 @@ const updateDownVote = () => {
 };
 
 
+
   return (
+     
     <div className="w-4/5 mx-auto pt-6">
       <div className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow-md md:flex-row md:max-w-4xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 my-2" style={{ marginLeft: '5px', width: '80%', minHeight: '200px' }}>
         <img className="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src={post.image_url} alt="" />
@@ -109,15 +112,18 @@ const updateDownVote = () => {
           <path d="M2.32422 14.7453L11.1475 24.3776C11.5137 24.7773 11.9971 25 12.5 25C13.0029 25 13.4863 24.7773 13.8525 24.3776L22.6758 14.7453C24.1602 13.1295 25 10.8627 25 8.49317V8.16201C25 4.17091 22.5342 0.767907 19.1699 0.111288C16.9434 -0.322651 14.6777 0.528098 13.0859 2.38947L12.5 3.07464L11.9141 2.38947C10.3223 0.528098 8.05664 -0.322651 5.83008 0.111288C2.46582 0.767907 0 4.17091 0 8.16201V8.49317C0 10.8627 0.839844 13.1295 2.32422 14.7453Z" fill="#1D4ED8"/>
           </svg>)}
             </button>
+          <Link to={`/posts/${post.id}`}>
             <button className="flex items-center justify-center w-10 h-10 mr-2 text-gray-700 bg-gray-200  rounded-full hover:bg-gray-300 focus:outline-none">
               <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M24.6718 23.3282L24.3935 23.05H24H3C1.87467 23.05 0.95 22.1253 0.95 21V3C0.95 1.87467 1.87467 0.95 3 0.95H27C28.1253 0.95 29.05 1.87467 29.05 3V27.7065L24.6718 23.3282ZM17.45 18V14.45H21C22.3497 14.45 23.45 13.3497 23.45 12C23.45 10.6503 22.3497 9.55 21 9.55H17.45V6C17.45 4.65033 16.3497 3.55 15 3.55C13.6503 3.55 12.55 4.65033 12.55 6V9.55H9C7.65033 9.55 6.55 10.6503 6.55 12C6.55 13.3497 7.65033 14.45 9 14.45H12.55V18C12.55 19.3497 13.6503 20.45 15 20.45C16.3497 20.45 17.45 19.3497 17.45 18Z" stroke="black" stroke-width="1.9"/>
               </svg>
             </button>
+            </Link>
           </div>
         </div>
       </div>
     </div>
+    
   );
 }
 

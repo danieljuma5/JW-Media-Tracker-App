@@ -5,6 +5,7 @@ import LoginForm from "./Components/LoginForm";
 import Home from "./Components/Home";
 import SignUpForm from "./Components/SignUpForm";
 import Posts from "./Components/Posts";
+import CommentPage from "./Components/CommentPage";
 
 function App() {
   const [user, setUser] = useState(null)
@@ -18,14 +19,6 @@ function App() {
   });
  }, []);
 
- function handleUpdatePost(updatedPost) {
-    const updatedPosts = posts.map((post) =>
-      post.id === updatedPost.id ? updatedPost : post
-    );
-    setPosts(updatedPosts);
-  }
-
-
   return (
     <div className="App">
       <Navbar user={user} setUser={setUser} />
@@ -33,7 +26,8 @@ function App() {
         <Route path="/login" element={<LoginForm setUser={setUser}/>}/>
         <Route path="/signup" element={<SignUpForm setUser={setUser} />}/>
       <Route path="/" element={<Home user={user}/>}/>
-      <Route path="/posts" element={<Posts posts={posts} setPosts={setPosts} onUpdatePost={handleUpdatePost} />}/>
+      <Route path="/posts" element={<Posts posts={posts} setPosts={setPosts} />}/>
+      <Route path="/posts/:postId" element={<CommentPage/>}/>
       </Routes>
     </div>
   );
