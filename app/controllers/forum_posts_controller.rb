@@ -36,6 +36,6 @@ before_action :authorize, only:[:create,:show]
     render json: {errors: invalid.record.errors.full_messages},status: :unprocessable_entity 
   end
   def authorize
-    return render json: {error: "Unauthorized Access"},status: :not_authorized
+    return render json: {error: "Unauthorized Access"},status: :not_authorized unless session.include? :user_id
   end
 end
