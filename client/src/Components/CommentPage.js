@@ -13,11 +13,11 @@ const CommentPage = () => {
     axios.get(`/posts/${postId}`)
       .then((response) => {
         setPosts(response.data);
-        setIsLoading(false); // Mark the loading as false once the posts are fetched
+        setIsLoading(false); 
       })
       .catch((error) => {
         console.log(error);
-        setIsLoading(false); // In case of an error, mark the loading as false to handle the error state
+        setIsLoading(false); 
       });
   }, [postId]);
 
@@ -29,7 +29,7 @@ const CommentPage = () => {
   return (
     <>
       <CommentPageCard post={posts} />
-      <CommentSection />
+      <CommentSection post={posts}/>
     </>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import CommentCard from './CommentCard';
 
-function CommentSection() {
+function CommentSection({post}) {
   const [comment, setComment] = useState('');
 
   const handleCommentChange = (event) => {
@@ -21,9 +22,9 @@ function CommentSection() {
           <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Discussion (20)</h2>
         </div>
         <form className="mb-6" onSubmit={handleSubmitComment}>
-  <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-    <label htmlFor="comment" className="sr-only">Your comment</label>
-    <textarea
+        <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+          <label htmlFor="comment" className="sr-only">Your comment</label>
+          <textarea
       id="comment"
       rows="6"
       value={comment}
@@ -32,17 +33,23 @@ function CommentSection() {
       placeholder="Write a comment..."
       required
     ></textarea>
-  </div>
-  <button
-  type="submit"
-  className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-1 focus:ring-blue-200 hover:bg-blue-500"
->
-  Post comment
-</button>
-</form>
-
-        {/* Render the comment articles dynamically */}
       </div>
+      <button
+      type="submit"
+      className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-1 focus:ring-blue-200 hover:bg-blue-500"
+    >
+      Post comment
+    </button>
+    </form>
+
+            {post.comments.map((comment) => (
+              <ul>
+                <li>
+                  <CommentCard comment={comment}/>
+                </li>
+              </ul>
+            ))}
+          </div>
     </section>
   );
 }
