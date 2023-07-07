@@ -6,32 +6,28 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 puts 'seeding...'
-BOOL = [true,false]
 $password_var = Faker::Alphanumeric.alphanumeric(number: 10)
 
 5.times do 
   user = User.create!(
     username:Faker::Internet.username,
-    email:Faker::Internet.free_email,
+    email:Faker::Internet.email,
     password_digest:BCrypt::Password.create("#$password_var"),
     avatar_url:Faker::LoremFlickr.grayscale_image
   )
 end
 
 10.times do 
-posts = Post.create!(
+forum_posts = ForumPost.create!(
   title:Faker::Movie.title,
-  image_url:Faker::LoremFlickr.image,
+  category:Faker::Book.genre,
   description:Faker::Lorem.paragraph(sentence_count: 2, supplemental: false, random_sentences_to_add: 4),
-  is_liked:BOOL.uniq.sample,
-  upvotes:rand(1..10),
-  downvotes:rand(1..10),
-  user_id:rand(1..5)
+  user_id:rand(1..7)
 )
 end
-15.times do
-  comments = Comment.create!(
-    body:Faker::Quote.famous_last_words,
+20.times do
+  forum_relies=ForumReply.create!(
+    body:Faker::Quote.most_interesting_man_in_the_world,
     user_id:rand(1..5),
     post_id:rand(1..10),
   )
