@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const CommentCard = ({ comment,user,post,setPost }) => {
+const CommentCard = ({ comment,user,setComment,setPost }) => {
 
   const isCurrentUser = user && comment.user_information.id === user.id;
   
@@ -31,6 +31,27 @@ const CommentCard = ({ comment,user,post,setPost }) => {
     console.error(error);
   });
   }
+
+  function handleEdit(id) {
+  axios
+    .patch(`/comments/${comment.id}`, {
+      body: comment.body
+    })
+    .then(response => {
+      console.log(response.data);
+      setPost(prevPost => ({
+        ...prevPost,
+        comments: prevPost.comments.filter(prevComment => prevComment.id !== comment.id)
+      }));
+      setComment(comment.body);
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    })
+    .catch(error => console.error(error));
+}
+
 
   return (
     <article className="p-6 mb-6 text-base bg-white rounded-lg dark:bg-gray-900">
@@ -65,7 +86,7 @@ const CommentCard = ({ comment,user,post,setPost }) => {
           >
             <ul className="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconHorizontalButton">
               <li>
-                <div className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</div>
+                <div onClick={handleEdit} className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</div>
               </li>
               <li>
                 <div onClick={handleDelete} className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</div>

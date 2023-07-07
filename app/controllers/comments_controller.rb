@@ -9,6 +9,11 @@ class CommentsController < ApplicationController
     comment.destroy
     head :no_content
   end
+  def update
+    comment = find_by
+    comment.update!(comment_params)
+    render json: comment,status: :accepted
+  end
   private
   def find_by
     comment = Comment.find(params[:id])

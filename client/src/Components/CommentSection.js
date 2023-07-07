@@ -70,7 +70,7 @@ function CommentSection({post,setPost,user}) {
             {post.comments.map((comment,index) => (
               <ul key={index}>
                 <li >
-                  <CommentCard post={post} setPost={setPost} comment={comment} user={user}/>
+                  <CommentCard setComment={setComment} setPost={setPost} comment={comment} user={user}/>
                 </li>
               </ul>
             ))}
