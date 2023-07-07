@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
-const CommentCard = ({ comment }) => {
+const CommentCard = ({ comment,user }) => {
+  const isCurrentUser = user && comment.user_information.id === user.id;
+  
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -28,7 +30,8 @@ const CommentCard = ({ comment }) => {
             <span>{time}</span>
           </p>
         </div>
-        <div className="relative">
+
+        {isCurrentUser && <div className="relative">
           <button
             id="dropdownComment1Button"
             onClick={toggleDropdown}
@@ -51,12 +54,9 @@ const CommentCard = ({ comment }) => {
               <li>
                 <div className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</div>
               </li>
-              <li>
-                <div className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</div>
-              </li>
             </ul>
           </div>
-        </div>
+        </div>}
       </footer>
       <p className="text-gray-500 dark:text-gray-400">{comment.body}</p>
       <div className="flex items-center mt-4 space-x-4">
