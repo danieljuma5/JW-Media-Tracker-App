@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ForumSection = ({ forumPost }) => {
   const formatDate = (dateString) => {
@@ -45,6 +46,7 @@ const ForumSection = ({ forumPost }) => {
               </dd>
             </div>
             <div className="flex-none w-full mt-2 font-normal flex items-center justify-end">
+              <Link to={`/forum_posts/${forumPost.id}`}>
               <button className="flex items-center justify-center w-10 h-10 mr-2 text-gray-700 bg-gray-200 rounded-full hover:bg-gray-300 focus:outline-none">
                 <svg
                   width="30"
@@ -59,6 +61,7 @@ const ForumSection = ({ forumPost }) => {
                   />
                 </svg>
               </button>
+              </Link>
               <span className="text-gray-500 ml-2">
                 {forumPost.forum_replies.length}
               </span>
