@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :authorize, only: [:create]
+rescue_from ActiveRecord::RecordNotFound, with: :render_comment_not_found
   def create
     comment = Comment.create!(comment_params)
     render json: comment
@@ -18,10 +19,13 @@ class CommentsController < ApplicationController
   def find_by
     comment = Comment.find(params[:id])
   end
+  def render_comment_not_found
+    render json: {error: "Comment Not Found"},status: :not_found
+  end
   def comment_params
     params.permit(:body,:post_id,:user_id)
   end
   def authorize
-    return render json: { errors: ["Unauthorized"] }, status: :unauthorized unless session.include? :user_id
+    return render json: { error: ["Unauthorized"] }, status: :unauthorized unless session.include? :user_id
     end
 end
