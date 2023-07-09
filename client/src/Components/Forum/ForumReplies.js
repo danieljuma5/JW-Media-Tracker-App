@@ -2,6 +2,7 @@ import { useState,useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import ErrorModal from './ErrorModal';
+import ForumRepliesCards from './ForumRepliesCards';
 
 
 const ForumReplies = ({user}) => {
@@ -10,7 +11,6 @@ const ForumReplies = ({user}) => {
   const [forumpost, setForumPost] = useState([]);
   const {forumPostId} = useParams()
 
-  console.log(forumpost,forumPostId)
   useEffect(() => {
     if (user) {
     axios.get(`/forum_posts/${forumPostId}`)
@@ -26,12 +26,17 @@ const ForumReplies = ({user}) => {
       setShowError(true)
     }
   }, [forumPostId]);
-
-
+  console.log(forumpost,showError)
+  
+  return (
+    <div>
+      {showError ? <ErrorModal/> :
+      <ForumRepliesCards forumpost={forumpost} />}
+    </div>
+  )
 
   // Render loading state until the posts are fetched
   if (isLoading) {
-    return <ErrorModal/>
   }
 
 }
