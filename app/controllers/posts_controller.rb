@@ -13,11 +13,15 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_post_not_found
     render json: post, status: :ok
 
   end
+  def create 
+    post = Post.create!(posts_params)
+    render json: post,status: :created
+  end
 
   private
   def posts_params
     # params.permit(:id,:title,:image_url,:description,:is_liked,:upvotes,:downvotes)
-     post_params = params.require(:post).permit(:is_liked,:upvotes,:downvotes)
+     post_params = params.require(:post).permit(:is_liked,:upvotes,:downvotes,:title,:image_url,:description,:user_id)
   end
   def find_by
     post = Post.find(params[:id])

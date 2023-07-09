@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import ForumSection from "./ForumSection";
 
@@ -32,9 +33,14 @@ const ForumPage = () => {
         <button className="bg-blue-500 text-white px-4 py-2 rounded-md" onClick={sortByReplies}>
           Most Replies
         </button>
-        <button className="bg-blue-500 text-white px-4 py-2 rounded-md" onClick={sortByCreatedAt}>
+        <button className="bg-blue-500 text-white px-4 py-2 rounded-md " onClick={sortByCreatedAt}>
           Newest
         </button>
+        <Link to={'/add_forum-post'} >
+        <button className="bg-blue-500 text-white px-4 py-2 rounded-md ml-auto"  >
+          Add Forum Post
+        </button>
+        </Link>
       </div>
       <hr className="my-4 border-gray-300" />
 

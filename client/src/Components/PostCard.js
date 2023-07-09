@@ -68,8 +68,7 @@ const updateDownVote = () => {
 
 
   return (
-     
-    <div className="w-4/5 mx-auto pt-6">
+    <div className="w-9/10 px-8 mx-auto pt-6">
       <div className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow-md md:flex-row md:max-w-4xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 my-2" style={{ marginLeft: '5px', width: '80%', minHeight: '200px' }}>
         <img className="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src={post.image_url} alt="" />
         <div className="flex flex-col justify-between p-4 leading-normal">
@@ -123,6 +122,7 @@ const updateDownVote = () => {
         </div>
       </div>
     </div>
+     
     
   );
 }

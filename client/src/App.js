@@ -8,6 +8,7 @@ import Posts from "./Components/Posts";
 import CommentPage from "./Components/CommentPage";
 import ForumPage from "./Components/Forum/ForumPage";
 import ForumReplies from "./Components/Forum/ForumReplies";
+import PostForm from "./Components/PostForm";
 
 function App() {
   const [user, setUser] = useState(null)
@@ -32,6 +33,7 @@ function App() {
       <Route path="/posts/:postId" element={<CommentPage user={user}/>}/>
       <Route path="/forum" element={<ForumPage/>} />
       <Route path="/forum_posts/:forumPostId" element={<ForumReplies user={user}/>}/>
+      <Route path="/add_post" element={<PostForm/>}/>
       </Routes>
     </div>
   );
