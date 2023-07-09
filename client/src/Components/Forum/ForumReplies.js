@@ -8,7 +8,7 @@ import ForumRepliesCards from './ForumRepliesCards';
 const ForumReplies = ({user}) => {
   const [isLoading, setIsLoading] = useState(true);
   const [showError, setShowError] = useState(false);
-  const [forumpost, setForumPost] = useState([]);
+  const [forumPost, setForumPost] = useState([]);
   const {forumPostId} = useParams()
 
   useEffect(() => {
@@ -26,19 +26,28 @@ const ForumReplies = ({user}) => {
       setShowError(true)
     }
   }, [forumPostId]);
-  console.log(forumpost,showError)
+  console.log(forumPost,showError)
   
   return (
     <div>
       {showError ? <ErrorModal/> :
-      <ForumRepliesCards forumpost={forumpost} />}
+      (<div>
+        {forumPost.forum_replies.map((reply) => (
+          <ul>
+            <li>
+              <ForumRepliesCards post={forumPost} reply={reply} />
+            </li>
+          </ul>
+        ))}
+      </div>)
+    }
     </div>
   )
-
+  
   // Render loading state until the posts are fetched
   if (isLoading) {
   }
-
+  
 }
 
 export default ForumReplies
