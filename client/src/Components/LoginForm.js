@@ -18,7 +18,11 @@ function LoginForm({ setUser }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ identifier, password }),
+      body: JSON.stringify({ 
+        identifier: identifier.trim(), 
+          password 
+        }
+        ),
     }).then((r) => {
       setIsLoading(false);
       if (r.ok) {
