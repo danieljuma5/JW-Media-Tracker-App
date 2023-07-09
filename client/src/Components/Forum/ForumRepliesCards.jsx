@@ -1,10 +1,56 @@
+import { useState } from "react";
 import React from 'react'
+import axios from "axios";
 
-const ForumRepliesCards = ({post,reply}) => {
+
+const ForumRepliesCards = ({post,reply,user,setComment,setForumPost}) => {
+  const isCurrentUser = user && reply.user_information.id === user.id;
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const dropdownClass = isDropdownOpen ? 'block' : 'hidden';
+
   // Separate date and time from the datetime string
   const createdAt = new Date(reply.created_at);
   const date = createdAt.toDateString();
   const time = createdAt.toLocaleTimeString();
+
+  function handleDelete(id) {
+    axios.delete(`/forum_replies/${reply.id}`)
+  .then(response => {
+    console.log(`Deleted post with ID ${reply.id}`);
+    setForumPost(prevPost => ({
+        ...prevPost,
+        forum_replies: prevPost.forum_replies.filter(prevComment => prevComment.id !== reply.id)
+      }));
+  })
+  .catch(error => {
+    console.error(error);
+  });
+  }
+
+  function handleEdit(id) {
+  axios
+    .patch(`/forum_replies/${reply.id}`, {
+      body: reply.body
+    })
+    .then(response => {
+      console.log(response.data);
+      setForumPost(prevPost => ({
+        ...prevPost,
+        forum_replies: prevPost.forum_replies.filter(prevComment => prevComment.id !== reply.id)
+      }));
+      setComment(reply.body);
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    })
+    .catch(error => console.error(error));
+}
   return (
     <div>
       <article className="p-6 mb-6 text-base bg-white rounded-lg dark:bg-gray-900">
@@ -22,9 +68,10 @@ const ForumRepliesCards = ({post,reply}) => {
           </p>
         </div>
 
-        <div className="relative">
+        {isCurrentUser && <div className="relative">
           <button
             id="dropdownComment1Button"
+            onClick={toggleDropdown}
             className="inline-flex items-center p-2 text-sm font-medium text-center text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
             type="button"
           >
@@ -35,18 +82,18 @@ const ForumRepliesCards = ({post,reply}) => {
           </button>
           <div
             id="dropdownComment1"
-            className={`absolute top-full right-0 z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 `}
+            className={`absolute top-full right-0 z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 ${dropdownClass}`}
           >
             <ul className="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconHorizontalButton">
               <li>
-                <div  className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</div>
+                <div onClick={handleEdit}  className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</div>
               </li>
               <li>
-                <div className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</div>
+                <div onClick={handleDelete} className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Remove</div>
               </li>
             </ul>
           </div>
-        </div>
+        </div>}
       </footer>
       <p className="text-gray-500 dark:text-gray-400">{reply.body}</p>
       <div className="flex items-center mt-4 space-x-4">
