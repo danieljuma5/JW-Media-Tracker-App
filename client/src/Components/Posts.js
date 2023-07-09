@@ -30,7 +30,7 @@ useEffect(() => {
   ))
 }
   </ul>
-      <div className="w-1/5 bg-gray-200 flex flex-col items-center">
+      <div className="w-auto bg-gray-200 flex flex-col items-center">
         <Link to={"/add_post"}>
         <button className="py-4 px-8 bg-blue-500 text-white font-semibold rounded-t-lg">Addpost</button>
         </Link>
