@@ -9,6 +9,7 @@ import CommentPage from "./Components/CommentPage";
 import ForumPage from "./Components/Forum/ForumPage";
 import ForumReplies from "./Components/Forum/ForumReplies";
 import PostForm from "./Components/PostForm";
+import ForumPostForm from "./Components/Forum/ForumPostForm";
 
 function App() {
   const [user, setUser] = useState(null)
@@ -33,7 +34,7 @@ function App() {
       <Route path="/posts/:postId" element={<CommentPage user={user}/>}/>
       <Route path="/forum" element={<ForumPage/>} />
       <Route path="/forum_posts/:forumPostId" element={<ForumReplies user={user}/>}/>
-      <Route path="/add_post" element={<PostForm user={user}/>}/>
+      <Route path="/add_forum-post" element={<ForumPostForm user={user}/>}/>
       </Routes>
     </div>
   );
