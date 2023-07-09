@@ -33,7 +33,7 @@ function App() {
       <Route path="/posts/:postId" element={<CommentPage user={user}/>}/>
       <Route path="/forum" element={<ForumPage/>} />
       <Route path="/forum_posts/:forumPostId" element={<ForumReplies user={user}/>}/>
-      <Route path="/add_post" element={<PostForm/>}/>
+      <Route path="/add_post" element={<PostForm user={user}/>}/>
       </Routes>
     </div>
   );
