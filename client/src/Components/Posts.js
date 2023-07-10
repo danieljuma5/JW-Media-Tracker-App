@@ -3,7 +3,7 @@ import PostCard from './PostCard'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
-function Posts({posts,setPosts,onUpdatePost}) {
+function Posts({posts,setPosts,onUpdatePost,user}) {
   
   // making a request for posts
   const fetchPosts = () => {
@@ -25,7 +25,7 @@ useEffect(() => {
   <ul>
   {posts.map((post) => (
     <li key={post.id}>
-  <PostCard onUpdatePost={onUpdatePost} setPosts={setPosts} post={post}/>
+  <PostCard onUpdatePost={onUpdatePost} setPosts={setPosts} post={post} user={user}/>
     </li>
   ))
 }

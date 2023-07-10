@@ -18,6 +18,11 @@ rescue_from ActiveRecord::RecordInvalid, with: :render_post_invalid_unprocessabl
     post = Post.create!(posts_params)
     render json: post,status: :created
   end
+  def destroy
+    post = find_by
+    post.destroy
+    head :no_content
+  end
 
   private
   def posts_params

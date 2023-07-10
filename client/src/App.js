@@ -30,9 +30,10 @@ function App() {
         <Route path="/login" element={<LoginForm setUser={setUser}/>}/>
         <Route path="/signup" element={<SignUpForm setUser={setUser} />}/>
       <Route path="/" element={<Home user={user}/>}/>
-      <Route path="/posts" element={<Posts posts={posts} setPosts={setPosts} />}/>
+      <Route path="/posts" element={<Posts posts={posts} setPosts={setPosts} user={user} />}/>
       <Route path="/posts/:postId" element={<CommentPage user={user}/>}/>
       <Route path="/forum" element={<ForumPage/>} />
+      <Route path="/add_post" element={<PostForm user={user}/>}/>
       <Route path="/forum_posts/:forumPostId" element={<ForumReplies user={user}/>}/>
       <Route path="/add_forum-post" element={<ForumPostForm user={user}/>}/>
       </Routes>
